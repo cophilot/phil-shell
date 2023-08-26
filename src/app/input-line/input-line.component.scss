@@ -17,3 +17,15 @@
   }
 }
 
+@media screen and (max-width: 800px) {
+  .container{
+    input{
+      font-size: 12px;
+      margin-left: 5px;
+      width: 45%;
+      border: 1px solid var(--color);
+      border-radius: 5px;
+      padding-left: 5px;
+    }
+  }
+}

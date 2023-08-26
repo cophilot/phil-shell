@@ -11,7 +11,7 @@ export class AppComponent {
   title = 'phil-shell';
 
   ngOnInit() {
-    AppearanceService.detectPrefersColorScheme();
+    AppearanceService.init();
 
     System.onBoot();
   }

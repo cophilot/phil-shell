@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AppearanceService {
+  static isMobile = false;
   static showHeader = true;
   static offsetLeft = 100;
   static offsetTop = 100;
@@ -23,6 +24,15 @@ export class AppearanceService {
     'royal',
     'retro',
   ];
+
+  static init() {
+    AppearanceService.detectPrefersColorScheme();
+    AppearanceService.isMobile = window.innerWidth < 800;
+    console.log('AppearanceService.isMobile', AppearanceService.isMobile);
+    if (AppearanceService.isMobile) {
+      AppearanceService.offsetLeft = 10;
+    }
+  }
 
   static setTheme(theme: string): boolean {
     if (AppearanceService.availableThemes.includes(theme)) {
