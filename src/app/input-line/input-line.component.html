@@ -1,0 +1,9 @@
+<div class="container">
+  <p>{{ dirString }}</p>
+  <input
+    type="text"
+    [(ngModel)]="inputValue"
+    (keyup)="onKey($event)"
+    autofocus
+  />
+</div>
