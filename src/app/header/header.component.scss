@@ -17,4 +17,26 @@
       transform: scale(1.1);
     }
   }
+  .getHelp{
+    float: right;
+    margin-right: 20px;
+    margin-top: 17px;
+    height: 34px;
+    width: 100px;
+    background-color: var(--color);
+    color: var(--bg-color);
+    border-radius: 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    &:hover{
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.7);
+      transform: scale(1.1);
+
+    }
+
+  }
 }

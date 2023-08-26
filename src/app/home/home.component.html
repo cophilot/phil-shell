@@ -5,6 +5,10 @@
   [style.margin-left.px]="getOffsetLeft()"
 >
   <app-history></app-history>
-  <app-input-line class="inputLine"></app-input-line>
+  <app-input-line
+    class="inputLine"
+    (lineExecuted)="onLineExecuted()"
+  ></app-input-line>
 </div>
 <div class="background" (click)="backgroundClick()"></div>
+<div #target id="eID"></div>

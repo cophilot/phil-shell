@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Compiler } from 'src/utils/Compiler';
 import { HistoryManager } from 'src/utils/HistoryManager';
 import { System } from 'src/utils/System';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-input-line',
@@ -9,6 +10,8 @@ import { System } from 'src/utils/System';
   styleUrls: ['./input-line.component.scss'],
 })
 export class InputLineComponent {
+  @Output() lineExecuted: EventEmitter<string> = new EventEmitter();
+
   public static LOCK = false;
 
   dirString: string =
@@ -30,7 +33,8 @@ export class InputLineComponent {
         HistoryManager.addCommand(this.inputValue);
         this.inputValue = '';
         this.setDirString();
-
+        // get height of page and scroll to bottom
+        this.lineExecuted.emit();
         this.commandHistoryIndex = 0;
       });
     }

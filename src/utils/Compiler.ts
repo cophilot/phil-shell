@@ -15,11 +15,15 @@ export class Compiler {
 
     if (executable === undefined) {
       if (command.startsWith('./')) {
-        HistoryManager.addLine(
-          `${
-            System.getCurrentPathAsString() + command.slice(1)
-          }: command not found`
-        );
+        if (System.getCurrentPathAsString() === '/') {
+          HistoryManager.addLine(`${command.slice(1)}: command not found`);
+        } else {
+          HistoryManager.addLine(
+            `${
+              System.getCurrentPathAsString() + command.slice(1)
+            }: command not found`
+          );
+        }
       } else {
         HistoryManager.addLine(
           `${System.getBashPathAsString() + '/' + command}: command not found`

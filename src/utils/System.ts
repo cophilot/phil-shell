@@ -11,9 +11,11 @@ import { get_sudo } from './commands/sudo';
 import { get_echo } from './commands/echo';
 import { get_reboot } from './commands/reboot';
 import { get_wait } from './commands/wait';
-import { get_system } from './commands/system';
+import { get_sys } from './commands/sys';
 import { get_time } from './commands/time';
 import { get_date } from './commands/date';
+import { get_help } from './commands/help';
+import { get_shutdown } from './commands/shutdown';
 
 export class System {
   public static VERSION = '1.0';
@@ -37,23 +39,20 @@ export class System {
   static getBashDir(): Dir {
     const bash = new Dir('bash');
 
-    // pwd
     bash.add(get_pwd());
-
-    // clear
     bash.add(get_clear());
-
-    // cd
     bash.add(get_cd());
-
-    // ls
     bash.add(get_ls());
-
-    // sudo
     bash.add(get_sudo());
-
-    // echo
     bash.add(get_echo());
+    bash.add(get_reboot());
+    bash.add(get_wait());
+    bash.add(get_sys());
+    bash.add(get_time());
+    bash.add(get_date());
+    bash.add(get_help());
+    bash.add(get_help());
+    bash.add(get_shutdown());
 
     /* // cat
     bash.add(
@@ -77,16 +76,6 @@ export class System {
       })
     ); */
 
-    bash.add(get_reboot());
-
-    bash.add(get_wait());
-
-    bash.add(get_system());
-
-    bash.add(get_time());
-
-    bash.add(get_date());
-
     return bash;
   }
 
@@ -103,38 +92,385 @@ export class System {
     );
     scripts.add(
       new BashFile('Welcome', [
-        'wait 100 q',
+        'wait 100 -q',
         'echo "                  welcome to                "',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " "',
-        'wait 100 q',
+        'wait 100 -q',
         'echo "        _     _ _            _          _ _ "',
-        'wait 100 q',
+        'wait 100 -q',
         'echo "       | |   (_) |          | |        | | |"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo "  _ __ | |__  _| |______ ___| |__   ___| | |"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ \\ | |"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " | |_) | | | | | |      \\__ \\ | | |  __/ | |"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_|_|"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " | |"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " |_|"',
-        'wait 100 q',
+        'wait 100 -q',
         'echo " "',
         'echo "Version"',
-        'system version',
+        'sys version',
         'echo " "',
+        'echo "Need help? Type \'help\'"',
+      ])
+    );
+    let delay = 50;
+    scripts.add(
+      new BashFile('Welcome2', [
+        'clear',
+        'sys theme random -q',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'echo " "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "  "',
+        'echo "  "',
+        'echo "  "',
+        'echo "  "',
+        'echo "  "',
+        'echo " |"',
+        'echo " |"',
+        'echo " |"',
+        'echo " |"',
+        'echo " |"',
+        'echo "  "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "    "',
+        'echo "    "',
+        'echo "    "',
+        'echo "    "',
+        'echo "  _ "',
+        'echo " |  "',
+        'echo " | |"',
+        'echo " | ."',
+        'echo " | |"',
+        'echo " |_|"',
+        'echo "    "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "      "',
+        'echo "      "',
+        'echo "      "',
+        'echo "      "',
+        'echo "  _ __"',
+        'echo " |  _ "',
+        'echo " | |_)"',
+        'echo " | .__"',
+        'echo " | |  "',
+        'echo " |_|  "',
+        'echo "      "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "        "',
+        'echo "        "',
+        'echo "        "',
+        'echo "       |"',
+        'echo "  _ __ |"',
+        'echo " |  _ \\"',
+        'echo " | |_) |"',
+        'echo " | .__/|"',
+        'echo " | |    "',
+        'echo " |_|    "',
+        'echo "        "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "          "',
+        'echo "          "',
+        'echo "        _ "',
+        'echo "       | |"',
+        'echo "  _ __ | |"',
+        'echo " |  _ \\| "',
+        'echo " | |_) | |"',
+        'echo " | .__/|_|"',
+        'echo " | |      "',
+        'echo " |_|      "',
+        'echo "          "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "            "',
+        'echo "            "',
+        'echo "        _   "',
+        'echo "       | |  "',
+        'echo "  _ __ | |__"',
+        'echo " |  _ \\|  _"',
+        'echo " | |_) | | |"',
+        'echo " | .__/|_| |"',
+        'echo " | |        "',
+        'echo " |_|        "',
+        'echo "            "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "              "',
+        'echo "              "',
+        'echo "        _     "',
+        'echo "       | |   ("',
+        'echo "  _ __ | |__  "',
+        'echo " |  _ \\|  _  "',
+        'echo " | |_) | | | |"',
+        'echo " | .__/|_| |_|"',
+        'echo " | |          "',
+        'echo " |_|          "',
+        'echo "              "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                "',
+        'echo "                "',
+        'echo "        _     _ "',
+        'echo "       | |   (_)"',
+        'echo "  _ __ | |__  _|"',
+        'echo " |  _ \\|  _ \\|"',
+        'echo " | |_) | | | | |"',
+        'echo " | .__/|_| |_|_|"',
+        'echo " | |            "',
+        'echo " |_|            "',
+        'echo "                "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  "',
+        'echo "                  "',
+        'echo "        _     _ _ "',
+        'echo "       | |   (_) |"',
+        'echo "  _ __ | |__  _| |"',
+        'echo " |  _ \\|  _ \\| |"',
+        'echo " | |_) | | | | | |"',
+        'echo " | .__/|_| |_|_|_|"',
+        'echo " | |              "',
+        'echo " |_|              "',
+        'echo "                  "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  we"',
+        'echo "                    "',
+        'echo "        _     _ _   "',
+        'echo "       | |   (_) |  "',
+        'echo "  _ __ | |__  _| |__"',
+        'echo " |  _ \\|  _ \\| | |"',
+        'echo " | |_) | | | | | |  "',
+        'echo " | .__/|_| |_|_|_|  "',
+        'echo " | |                "',
+        'echo " |_|                "',
+        'echo "                    "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  welc"',
+        'echo "                      "',
+        'echo "        _     _ _     "',
+        'echo "       | |   (_) |    "',
+        'echo "  _ __ | |__  _| |____"',
+        'echo " |  _ \\|  _ \\| | |__"',
+        'echo " | |_) | | | | | |    "',
+        'echo " | .__/|_| |_|_|_|    "',
+        'echo " | |                  "',
+        'echo " |_|                  "',
+        'echo "                      "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  welcom"',
+        'echo "                        "',
+        'echo "        _     _ _       "',
+        'echo "       | |   (_) |      "',
+        'echo "  _ __ | |__  _| |______"',
+        'echo " |  _ \\|  _ \\| | |____"',
+        'echo " | |_) | | | | | |      "',
+        'echo " | .__/|_| |_|_|_|      "',
+        'echo " | |                    "',
+        'echo " |_|                    "',
+        'echo "                        "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  welcome "',
+        'echo "                          "',
+        'echo "        _     _ _         "',
+        'echo "       | |   (_) |        "',
+        'echo "  _ __ | |__  _| |______ _"',
+        'echo " |  _ \\|  _ \\| | |______"',
+        'echo " | |_) | | | | | |      \\"',
+        'echo " | .__/|_| |_|_|_|      |_"',
+        'echo " | |                      "',
+        'echo " |_|                      "',
+        'echo "                          "',
+        'wait ' + delay + ' -q',
+        'clear',
+        'echo "                  welcome to"',
+        'echo "                            "',
+        'echo "        _     _ _           "',
+        'echo "       | |   (_) |          "',
+        'echo "  _ __ | |__  _| |______ ___"',
+        'echo " |  _ \\|  _ \\| | |______/ "',
+        'echo " | |_) | | | | | |      \\__"',
+        'echo " | .__/|_| |_|_|_|      |___"',
+        'echo " | |                        "',
+        'echo " |_|                        "',
+        'echo "                            "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to  "',
+        'echo "                              "',
+        'echo "        _     _ _            _"',
+        'echo "       | |   (_) |          | "',
+        'echo "  _ __ | |__  _| |______ ___| "',
+        'echo " |  _ \\|  _ \\| | |______/ __"',
+        'echo " | |_) | | | | | |      \\__  "',
+        'echo " | .__/|_| |_|_|_|      |___/_"',
+        'echo " | |                          "',
+        'echo " |_|                          "',
+        'echo "                              "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to    "',
+        'echo "                                "',
+        'echo "        _     _ _            _  "',
+        'echo "       | |   (_) |          | | "',
+        'echo "  _ __ | |__  _| |______ ___| |_"',
+        'echo " |  _ \\|  _ \\| | |______/ __| "',
+        'echo " | |_) | | | | | |      \\__ \\ "',
+        'echo " | .__/|_| |_|_|_|      |___/_| "',
+        'echo " | |                            "',
+        'echo " |_|                            "',
+        'echo "                                "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to      "',
+        'echo "                                  "',
+        'echo "        _     _ _            _    "',
+        'echo "       | |   (_) |          | |   "',
+        'echo "  _ __ | |__  _| |______ ___| |__ "',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _"',
+        'echo " | |_) | | | | | |      \\__ \\ | "',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_"',
+        'echo " | |                              "',
+        'echo " |_|                              "',
+        'echo "                                  "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to        "',
+        'echo "                                    "',
+        'echo "        _     _ _            _      "',
+        'echo "       | |   (_) |          | |     "',
+        'echo "  _ __ | |__  _| |______ ___| |__   "',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _  "',
+        'echo " | |_) | | | | | |      \\__ \\ | | "',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_| "',
+        'echo " | |                                "',
+        'echo " |_|                                "',
+        'echo "                                    "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to          "',
+        'echo "                                      "',
+        'echo "        _     _ _            _        "',
+        'echo "       | |   (_) |          | |       "',
+        'echo "  _ __ | |__  _| |______ ___| |__   __"',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ "',
+        'echo " | |_) | | | | | |      \\__ \\ | | | "',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\_"',
+        'echo " | |                                  "',
+        'echo " |_|                                  "',
+        'echo "                                      "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to            "',
+        'echo "                                        "',
+        'echo "        _     _ _            _          "',
+        'echo "       | |   (_) |          | |        |"',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___|"',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / "',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  _"',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___"',
+        'echo " | |                                    "',
+        'echo " |_|                                    "',
+        'echo "                                        "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to              "',
+        'echo "                                          "',
+        'echo "        _     _ _            _          _ "',
+        'echo "       | |   (_) |          | |        | |"',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___| |"',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ "',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  __/"',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_"',
+        'echo " | |                                      "',
+        'echo " |_|                                      "',
+        'echo "                                          "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to                "',
+        'echo "                                            "',
+        'echo "        _     _ _            _          _ _ "',
+        'echo "       | |   (_) |          | |        | | |"',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___| | |"',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ \\"',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  __/ |"',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_|_"',
+        'echo " | |                                        "',
+        'echo " |_|                                        "',
+        'echo "                                            "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to                  "',
+        'echo "                                              "',
+        'echo "        _     _ _            _          _ _   "',
+        'echo "       | |   (_) |          | |        | | |  "',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___| | |  "',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ \\ |"',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  __/ | |"',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_|_| "',
+        'echo " | |                                          "',
+        'echo " |_|                                          "',
+        'echo "                                              "',
+        'wait ' + delay + ' -q',
+
+        'clear',
+        'echo "                  welcome to                    "',
+        'echo "                                                "',
+        'echo "        _     _ _            _          _ _     "',
+        'echo "       | |   (_) |          | |        | | |    "',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___| | |    "',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ \\ | |"',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  __/ | |  "',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_|_|   "',
+        'echo " | |                                            "',
+        'echo " |_|                                            "',
+        'echo "                                                "',
+        'wait ' + delay + ' -q',
+
+        'echo "Version"',
+        'sys version',
+        'echo " "',
+        'echo "Need help? Type \'help\'"',
       ])
     );
     scripts.add(
       new BashFile('onboot', [
         '# This file will be executed on boot',
         'cd ~',
-        './scripts/Welcome.sh',
+        './scripts/Welcome2.sh',
       ])
     );
     const projects = new Dir('projects');
@@ -229,7 +565,6 @@ export class System {
       }
       if (!(entry instanceof Dir)) {
         if (i !== dirs.length - 1) {
-          console.log('entry undefined2');
           return undefined;
         } else {
           newPath.push(entry);

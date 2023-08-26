@@ -1,4 +1,5 @@
 import { Entry } from './Entry';
+import { SynonymManager } from './SynonymManager';
 
 export class Executable extends Entry {
   public readonly HELP: string[] = [];
@@ -19,7 +20,15 @@ export class Executable extends Entry {
   }
 
   execute(args: string[]): string[] {
-    return this.exec.execute(args);
+    let quiet = false;
+    if (SynonymManager.isQuietly(args)) {
+      quiet = true;
+    }
+    let result = this.exec.execute(args);
+    if (!quiet) {
+      return result;
+    }
+    return [];
   }
 
   async executeAsync(args: string[]): Promise<string[]> {

@@ -1,5 +1,6 @@
 import { Executable } from '../Executable';
 import { HistoryManager } from '../HistoryManager';
+import { SynonymManager } from '../SynonymManager';
 
 export function get_wait() {
   return new Executable(
@@ -17,14 +18,8 @@ export function get_wait() {
         if (isNaN(time)) {
           return [`wait: invalid argument`];
         }
-        let quietly = false;
-        if (args.length == 2) {
-          if (args[1] == 'quietly' || args[1] == 'q' || args[1] == '-q') {
-            quietly = true;
-          } else {
-            return [`wait: invalid argument`];
-          }
-        }
+        let quietly = SynonymManager.isQuietly(args);
+
         if (!quietly) {
           HistoryManager.addLine(`waiting ${time}ms...`);
         }

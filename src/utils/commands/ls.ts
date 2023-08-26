@@ -1,7 +1,9 @@
+import { AppearanceService } from 'src/app/services/appearance.service';
 import { Dir } from '../Dir';
 import { Entry } from '../Entry';
 import { Executable } from '../Executable';
 import { System } from '../System';
+import { SynonymManager } from '../SynonymManager';
 
 export function get_ls() {
   return new Executable(
@@ -14,10 +16,10 @@ export function get_ls() {
 
         const colorEntries = (entry: Entry) => {
           if (entry instanceof Dir) {
-            return '$$$#08458f~~~' + entry.name + '$$$';
+            return SynonymManager.colorString(entry.name, '#08458f');
           }
           if (entry instanceof Executable) {
-            return '$$$#28865c~~~' + entry.name + '$$$';
+            return SynonymManager.colorString(entry.name, '#28865c');
           }
 
           return entry.name;
