@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HistoryService } from '../services/history.service';
+import { HistoryManager } from 'src/utils/HistoryManager';
 
 @Component({
   selector: 'app-history',
@@ -7,9 +7,7 @@ import { HistoryService } from '../services/history.service';
   styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent {
-  constructor(private historyService: HistoryService) {}
-
   getHistory() {
-    return this.historyService.getHistory();
+    return HistoryManager.getHistory();
   }
 }

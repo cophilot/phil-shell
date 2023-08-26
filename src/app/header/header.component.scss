@@ -1,0 +1,15 @@
+.header {
+  position: fixed;
+  height: 70px;
+  width: 100%;
+  top: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+  .logo{
+    float: left;
+    top:0px;
+    margin-left: 5px;
+    height: 70px;
+    width: 70px;
+  }
+}

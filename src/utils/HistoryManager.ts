@@ -1,24 +1,32 @@
-import { Injectable } from '@angular/core';
+export class HistoryManager {
+  private static history: string[] = [];
+  private static commandHistory: string[] = [];
 
-@Injectable({
-  providedIn: 'root',
-})
-export class HistoryService {
-  history: string[] = [];
-
-  constructor() {
-    //this.getWelcome();
-  }
-
-  addLine(line: string) {
+  static addLine(line: string) {
     this.history.push(line);
   }
 
-  getHistory() {
+  static addLines(lines: string[]) {
+    lines.forEach((line) => this.history.push(line));
+  }
+
+  static getHistory() {
     return this.history;
   }
 
-  getWelcome() {
+  static clear() {
+    this.history = [];
+  }
+
+  static addCommand(command: string) {
+    this.commandHistory.unshift(command);
+  }
+
+  static getCommandHistory() {
+    return this.commandHistory;
+  }
+
+  static getWelcome() {
     this.history.push('                  welcome to                ');
     this.history.push('');
 
