@@ -1,27 +1,28 @@
-# PhilShell
+<div align="center">
+  <br />
+  <img src="src/assets/logo.png" alt="phil-shellLogo" width="30%"/>
+  <h1>phil-shell</h1>
+  <p>
+     Description
+  </p>
+</div>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
+<!-- Badges -->
+<div align="center">
+   <a href="https://github.com/phil1436/phil-shell/releases">
+       <img src="https://img.shields.io/github/v/release/phil1436/phil-shell?display_name=tag" alt="current realease" />
+   </a>
+   <a href="https://github.com/phil1436/phil-shell/blob/master/LICENSE">
+       <img src="https://img.shields.io/github/license/phil1436/phil-shell" alt="license" />
+   </a>
+   <a href="https://github.com/phil1436/phil-shell/stargazers">
+       <img src="https://img.shields.io/github/stars/phil1436/phil-shell" alt="stars" />
+   </a>
+   <a href="https://github.com/phil1436/phil-shell/commits/master">
+       <img src="https://img.shields.io/github/last-commit/phil1436/phil-shell" alt="last commit" />
+   </a>
+</div>
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+by [Philipp B.](https://github.com/phil1436)
