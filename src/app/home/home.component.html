@@ -1,5 +1,9 @@
-<app-header></app-header>
-<div class="container">
+<app-header *ngIf="getShowHeader()"></app-header>
+<div
+  class="container"
+  [style.margin-top.px]="getOffsetTop()"
+  [style.margin-left.px]="getOffsetLeft()"
+>
   <app-history></app-history>
   <app-input-line class="inputLine"></app-input-line>
 </div>

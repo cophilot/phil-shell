@@ -8,8 +8,13 @@
   .logo{
     float: left;
     top:0px;
-    margin-left: 5px;
+    margin-left: 20px;
     height: 70px;
     width: 70px;
+    -webkit-filter: drop-shadow(2px 2px 0 var(--color));
+    filter: drop-shadow(2px 2px 0 var(--color));
+    &:hover{
+      transform: scale(1.1);
+    }
   }
 }

@@ -9,25 +9,30 @@ import { System } from 'src/utils/System';
   styleUrls: ['./input-line.component.scss'],
 })
 export class InputLineComponent {
+  public static LOCK = false;
+
   dirString: string =
     'phil@phil-shell:' + System.getCurrentPathAsString() + '$';
   inputValue: string = '';
   commandHistoryIndex = 0;
 
+  ngOnInit() {
+    this.setDirString();
+  }
+
   onKey(event: any) {
     // enter
     if (event.keyCode === 13) {
       HistoryManager.addLine(this.dirString + ' ' + this.inputValue);
-      Compiler.compileLine(this.inputValue);
-      HistoryManager.addCommand(this.inputValue);
-      this.inputValue = '';
-      if (System.getCurrentPathAsString() == System.getUserPathAsString()) {
-        this.dirString = 'phil@phil-shell:~$';
-      } else {
-        this.dirString =
-          'phil@phil-shell:' + System.getCurrentPathAsString() + '$';
-      }
-      this.commandHistoryIndex = 0;
+      InputLineComponent.LOCK = true;
+      Compiler.compileLine(this.inputValue).then(() => {
+        InputLineComponent.LOCK = false;
+        HistoryManager.addCommand(this.inputValue);
+        this.inputValue = '';
+        this.setDirString();
+
+        this.commandHistoryIndex = 0;
+      });
     }
     if (event.keyCode === 38) {
       if (
@@ -47,5 +52,18 @@ export class InputLineComponent {
         this.inputValue = '';
       }
     }
+  }
+
+  setDirString() {
+    if (System.getCurrentPathAsString() == System.getUserPathAsString()) {
+      this.dirString = 'phil@phil-shell:~$';
+    } else {
+      this.dirString =
+        'phil@phil-shell:' + System.getCurrentPathAsString() + '$';
+    }
+  }
+
+  getLock() {
+    return InputLineComponent.LOCK;
   }
 }

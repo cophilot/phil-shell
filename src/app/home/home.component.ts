@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  backgroundClick() {
-    console.log('background clicked');
+  backgroundClick() {}
+
+  getShowHeader() {
+    return AppComponent.showHeader;
+  }
+
+  getOffsetLeft() {
+    return AppComponent.offsetLeft;
+  }
+
+  getOffsetTop() {
+    return AppComponent.offsetTop;
   }
 }

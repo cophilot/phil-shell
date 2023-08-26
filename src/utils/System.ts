@@ -1,17 +1,25 @@
 import { Dir } from './Dir';
 import { Entry } from './Entry';
-import { File } from './File';
 import { Executable } from './Executable';
-import { HistoryManager } from './HistoryManager';
+import { BashFile } from './BashFile';
+import { Compiler } from './Compiler';
+import { get_pwd } from './commands/pwd';
+import { get_clear } from './commands/clear';
+import { get_cd } from './commands/cd';
+import { get_ls } from './commands/ls';
+import { get_sudo } from './commands/sudo';
+import { get_echo } from './commands/echo';
+import { get_reboot } from './commands/reboot';
+import { get_wait } from './commands/wait';
+import { get_system } from './commands/system';
+import { get_time } from './commands/time';
+import { get_date } from './commands/date';
 
 export class System {
+  public static VERSION = '1.0';
   public static BASH: Dir = System.getBashDir();
   public static ROOT: Dir = System.getRoot();
-  public static currentPath: Dir[] = [
-    System.ROOT,
-    /*     System.ROOT.getEntry('bin') as Dir,
-    System.BASH, */
-  ];
+  public static currentPath: Dir[] = [System.ROOT];
 
   static getRoot(): Dir {
     const root = new Dir('');
@@ -30,135 +38,22 @@ export class System {
     const bash = new Dir('bash');
 
     // pwd
-    bash.add(
-      new Executable('pwd', {
-        execute: (args) => {
-          if (args.length > 0) {
-            return [`pwd: too many arguments`];
-          }
-          return [System.getCurrentPathAsString()];
-        },
-      })
-    );
+    bash.add(get_pwd());
 
     // clear
-    bash.add(
-      new Executable('clear', {
-        execute: (args) => {
-          if (args.length > 0) {
-            return [`clear: too many arguments`];
-          }
-          HistoryManager.clear();
-          return [];
-        },
-      })
-    );
+    bash.add(get_clear());
 
     // cd
-    bash.add(
-      new Executable('cd', {
-        execute: (args) => {
-          if (args.length > 1) {
-            return [`cd: too many arguments`];
-          }
-
-          if (args.length === 0) {
-            System.currentPath = [System.ROOT];
-            return [];
-          }
-
-          if (args[0] === '..') {
-            if (System.currentPath.length === 1) {
-              return [`cd: can't go back from root`];
-            }
-            System.currentPath.pop();
-            return [];
-          }
-
-          if (args[0] === '.') {
-            return [];
-          }
-
-          const newPath = System.resolveNewPath(args[0]);
-
-          if (newPath === undefined) {
-            return [`cd: ${args[0]}: No such file or directory`];
-          }
-          if (!(newPath[newPath.length - 1] instanceof Dir)) {
-            return [`cd: ${args[0]}: Not a directory`];
-          }
-          System.currentPath = newPath as Dir[];
-          return [];
-        },
-      })
-    );
+    bash.add(get_cd());
 
     // ls
-    bash.add(
-      new Executable(
-        'ls',
-        {
-          execute: (args) => {
-            if (args.length > 1) {
-              return [`ls: too many arguments`];
-            }
-
-            const colorEntries = (entry: Entry) => {
-              if (entry instanceof Dir) {
-                return '$$$#08458f~~~' + entry.name + '$$$';
-              }
-              if (entry instanceof Executable) {
-                return '$$$#28865c~~~' + entry.name + '$$$';
-              }
-
-              return entry.name;
-            };
-
-            if (args.length === 0) {
-              return [
-                System.getCurrentDir().getEntries().map(colorEntries).join(' '),
-              ];
-            }
-
-            const path = System.resolveNewPath(args[0]);
-            if (path === undefined) {
-              return [`ls: ${args[0]}: No such file or directory`];
-            }
-            if (!(path[path.length - 1] instanceof Dir)) {
-              return [`ls: ${args[0]}: Not a directory`];
-            }
-            return [
-              (path[path.length - 1] as Dir)
-                .getEntries()
-                .map(colorEntries)
-                .join(' '),
-            ];
-          },
-        },
-        [
-          'List information about the FILEs (the current directory by default).',
-          'ls [dir]?',
-        ]
-      )
-    );
+    bash.add(get_ls());
 
     // sudo
-    bash.add(
-      new Executable('sudo', {
-        execute: (args) => {
-          return ['$$$red~~~ERROR$$$: Permission denied'];
-        },
-      })
-    );
+    bash.add(get_sudo());
 
     // echo
-    bash.add(
-      new Executable('echo', {
-        execute: (args) => {
-          return [args.join(' ').replace(/"/g, '')];
-        },
-      })
-    );
+    bash.add(get_echo());
 
     /* // cat
     bash.add(
@@ -182,12 +77,66 @@ export class System {
       })
     ); */
 
+    bash.add(get_reboot());
+
+    bash.add(get_wait());
+
+    bash.add(get_system());
+
+    bash.add(get_time());
+
+    bash.add(get_date());
+
     return bash;
   }
 
   static getUserDir(): Dir {
     const userDir = new Dir('phil');
+    const scripts = new Dir('scripts');
+    userDir.add(scripts);
 
+    scripts.add(
+      new BashFile('HelloWorld', [
+        '# Hello World Script',
+        "echo 'Hello World!'",
+      ])
+    );
+    scripts.add(
+      new BashFile('Welcome', [
+        'wait 100 q',
+        'echo "                  welcome to                "',
+        'wait 100 q',
+        'echo " "',
+        'wait 100 q',
+        'echo "        _     _ _            _          _ _ "',
+        'wait 100 q',
+        'echo "       | |   (_) |          | |        | | |"',
+        'wait 100 q',
+        'echo "  _ __ | |__  _| |______ ___| |__   ___| | |"',
+        'wait 100 q',
+        'echo " |  _ \\|  _ \\| | |______/ __|  _ \\ / _ \\ | |"',
+        'wait 100 q',
+        'echo " | |_) | | | | | |      \\__ \\ | | |  __/ | |"',
+        'wait 100 q',
+        'echo " | .__/|_| |_|_|_|      |___/_| |_|\\___|_|_|"',
+        'wait 100 q',
+        'echo " | |"',
+        'wait 100 q',
+        'echo " |_|"',
+        'wait 100 q',
+        'echo " "',
+        'echo "Version"',
+        'system version',
+        'echo " "',
+      ])
+    );
+    scripts.add(
+      new BashFile('onboot', [
+        '# This file will be executed on boot',
+        'cd ~',
+        './scripts/Welcome.sh',
+      ])
+    );
     const projects = new Dir('projects');
     const skills = new Dir('skills');
     const contact = new Dir('contact');
@@ -225,6 +174,16 @@ export class System {
     newPath.push(currentDir);
     const dirs = path.split('/').slice(1);
     for (let i = 0; i < dirs.length; i++) {
+      if (dirs[i] === '.') continue;
+      if (dirs[i] === '..') {
+        if (newPath.length === 1) {
+          return undefined;
+        }
+        newPath.pop();
+        currentDir = newPath[newPath.length - 1] as Dir;
+        continue;
+      }
+
       const entry = currentDir.getEntry(dirs[i]);
       if (entry === undefined) {
         return undefined;
@@ -254,15 +213,23 @@ export class System {
     } else {
       dirs = [path];
     }
-
-    console.log(dirs);
     for (let i = 0; i < dirs.length; i++) {
+      if (dirs[i] === '.') continue;
+      if (dirs[i] === '..') {
+        if (newPath.length === 1) {
+          return undefined;
+        }
+        newPath.pop();
+        currentDir = newPath[newPath.length - 1] as Dir;
+        continue;
+      }
       const entry = currentDir.getEntry(dirs[i]);
       if (entry === undefined) {
         return undefined;
       }
       if (!(entry instanceof Dir)) {
         if (i !== dirs.length - 1) {
+          console.log('entry undefined2');
           return undefined;
         } else {
           newPath.push(entry);
@@ -295,14 +262,17 @@ export class System {
     return '/bin/bash';
   }
 
+  static onBoot(): void {
+    Compiler.compileLine('./home/phil/scripts/onboot.sh');
+  }
+
   static getExecutable(name: string): Executable | undefined {
     if (name.startsWith('./')) {
-      name = name.substring(2);
-      const ex = System.getCurrentDir().getEntry(name);
-      if (ex === undefined || !(ex instanceof Executable)) {
-        return undefined;
+      const path = System.resolveNewPath(name);
+
+      if (path !== undefined && path[path.length - 1] instanceof Executable) {
+        return path[path.length - 1] as Executable;
       }
-      return ex;
     }
 
     const ex = System.BASH.getEntry(name);

@@ -3,7 +3,7 @@ import { HistoryManager } from './HistoryManager';
 import { System } from './System';
 
 export class Compiler {
-  static compileLine(line: string) {
+  static async compileLine(line: string): Promise<void> {
     if (line.length === 0) return;
     line = line.trim();
 
@@ -11,7 +11,7 @@ export class Compiler {
     let command = words[0];
     let args = words.slice(1);
 
-    const executable = System.getExecutable(command);
+    let executable = System.getExecutable(command);
 
     if (executable === undefined) {
       if (command.startsWith('./')) {
@@ -26,8 +26,15 @@ export class Compiler {
         );
       }
 
-      return;
+      return Promise.resolve();
     }
-    HistoryManager.addLines((executable as Executable).execute(args));
+    executable = executable as Executable;
+    if (executable.IS_ASYNC) {
+      let output = await executable.executeAsync(args);
+      HistoryManager.addLines(output);
+    } else {
+      HistoryManager.addLines(executable.execute(args));
+    }
+    return Promise.resolve();
   }
 }
