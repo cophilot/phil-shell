@@ -59,8 +59,16 @@ export class InputLineComponent {
   }
 
   setDirString() {
-    if (System.getCurrentPathAsString() == System.getUserPathAsString()) {
-      this.dirString = 'phil@phil-shell:~$';
+    if (
+      System.getCurrentPathAsString().startsWith(System.getUserPathAsString())
+    ) {
+      this.dirString =
+        'phil@phil-shell:' +
+        System.getCurrentPathAsString().replace(
+          System.getUserPathAsString(),
+          '~'
+        ) +
+        '$';
     } else {
       this.dirString =
         'phil@phil-shell:' + System.getCurrentPathAsString() + '$';

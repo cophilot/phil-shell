@@ -1,4 +1,5 @@
 import { Entry } from './Entry';
+import { PermissionFlag } from './PermissionFlag';
 import { SynonymManager } from './SynonymManager';
 
 export class Executable extends Entry {
@@ -17,6 +18,7 @@ export class Executable extends Entry {
     }
 
     this.IS_ASYNC = async;
+    this.permissionFlags.push(PermissionFlag.EXECUTE);
   }
 
   execute(args: string[]): string[] {
@@ -33,6 +35,18 @@ export class Executable extends Entry {
 
   async executeAsync(args: string[]): Promise<string[]> {
     return this.exec.executeAsync(args);
+  }
+
+  override setExecutable(executable: boolean): void {
+    // do nothing here
+  }
+
+  override setReadable(readable: boolean): void {
+    // do nothing here
+  }
+
+  override setWritable(writable: boolean): void {
+    // do nothing here
   }
 }
 

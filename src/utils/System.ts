@@ -16,6 +16,9 @@ import { get_time } from './commands/time';
 import { get_date } from './commands/date';
 import { get_help } from './commands/help';
 import { get_shutdown } from './commands/shutdown';
+import { get_cat } from './commands/cat';
+import { get_ll } from './commands/ll';
+import { get_mkdir } from './commands/mkdir';
 
 export class System {
   public static VERSION = '1.0';
@@ -51,30 +54,12 @@ export class System {
     bash.add(get_time());
     bash.add(get_date());
     bash.add(get_help());
-    bash.add(get_help());
     bash.add(get_shutdown());
+    bash.add(get_cat());
+    bash.add(get_ll());
+    bash.add(get_mkdir());
 
-    /* // cat
-    bash.add(
-      new Executable('cat', {
-        execute: (args) => {
-          if (args.length === 0) {
-            return [`cat: missing operand`];
-          }
-          if (args.length > 1) {
-            return [`cat: too many arguments`];
-          }
-          const file = System.getCurrentDir().getEntry(args[0]);
-          if (file === undefined) {
-            return [`cat: ${args[0]}: No such file or directory`];
-          }
-          if (file instanceof Dir) {
-            return [`cat: ${args[0]}: Is a directory`];
-          }
-          return [file.name];
-        },
-      })
-    ); */
+    bash.setWritable(false);
 
     return bash;
   }
@@ -470,7 +455,7 @@ export class System {
       new BashFile('onboot', [
         '# This file will be executed on boot',
         'cd ~',
-        './scripts/Welcome2.sh',
+        './scripts/Welcome2.ph',
       ])
     );
     const projects = new Dir('projects');
@@ -497,6 +482,9 @@ export class System {
       );
     }
 
+    if (path == '/') {
+      return [System.ROOT];
+    }
     if (path.startsWith('/')) {
       return this.resolveNewPathFromRoot(path);
     }
@@ -598,7 +586,7 @@ export class System {
   }
 
   static onBoot(): void {
-    Compiler.compileLine('./home/phil/scripts/onboot.sh');
+    Compiler.compileLine('./home/phil/scripts/onboot.ph');
   }
 
   static getExecutable(name: string): Executable | undefined {

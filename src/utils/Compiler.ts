@@ -33,7 +33,10 @@ export class Compiler {
       return Promise.resolve();
     }
     executable = executable as Executable;
-    if (executable.IS_ASYNC) {
+
+    if (!executable.isExecutable()) {
+      HistoryManager.addLine(`${command}: permission denied`);
+    } else if (executable.IS_ASYNC) {
       let output = await executable.executeAsync(args);
       HistoryManager.addLines(output);
     } else {

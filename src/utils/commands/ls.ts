@@ -1,4 +1,3 @@
-import { AppearanceService } from 'src/app/services/appearance.service';
 import { Dir } from '../Dir';
 import { Entry } from '../Entry';
 import { Executable } from '../Executable';
