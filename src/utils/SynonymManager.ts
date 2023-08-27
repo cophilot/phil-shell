@@ -33,4 +33,7 @@ export class SynonymManager {
   static colorString(str: string, color: string): string {
     return '$$$' + color + '~~~' + str + '$$$';
   }
+  static linkString(str: string, link: string): string {
+    return '$$$' + link + '&&&' + str + '$$$';
+  }
 }

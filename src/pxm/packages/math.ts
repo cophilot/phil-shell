@@ -2,7 +2,7 @@ import { Executable } from 'src/utils/Executable';
 import { PXMPackage } from '../PXMPackage';
 
 export function get_math_package() {
-  return new PXMPackage('math', '0.0.1', 'Math package', [
+  return new PXMPackage('math', '1.0', 'Math package', [
     new Executable('add', {
       execute: (args) => {
         if (args.length != 2) return ['add: missing operand'];

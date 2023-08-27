@@ -9,9 +9,10 @@ import { InputLineComponent } from './input-line/input-line.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
 import { HeaderComponent } from './header/header.component';
+import { ViComponent } from './vi/vi.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, InputLineComponent, HistoryComponent, HeaderComponent],
+  declarations: [AppComponent, HomeComponent, InputLineComponent, HistoryComponent, HeaderComponent, ViComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

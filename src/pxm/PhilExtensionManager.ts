@@ -4,6 +4,7 @@ import { SynonymManager } from 'src/utils/SynonymManager';
 import { get_math_package } from './packages/math';
 import { System } from 'src/utils/System';
 import { Executable } from 'src/utils/Executable';
+import { get_echoa_package } from './packages/echoa';
 
 export class PhilExtensionManager {
   public static PXM_MODULES: Dir = PhilExtensionManager.getPXM_MODULES();
@@ -47,7 +48,7 @@ export class PhilExtensionManager {
       }
     }
     for (let file of pkg.folder.entries) {
-      log.push('Installing file ' + file.name + '...');
+      log.push('Installing command ' + file.name + '...');
       if (file instanceof Executable) {
         if (!System.isSystemCommandNameFree(file.name)) {
           log.push(
@@ -79,13 +80,50 @@ export class PhilExtensionManager {
     return log;
   }
 
-  static getInstalledPackages(): string[] {
-    return PhilExtensionManager.PXM_MODULES.entries.map((entry) => entry.name);
+  static getInstalledPackages(withInfos: boolean): string[] {
+    let packageNames = PhilExtensionManager.PXM_MODULES.entries.map(
+      (entry) => entry.name
+    );
+    if (!withInfos) {
+      return packageNames;
+    }
+    let result: string[] = [];
+    packageNames.forEach((packageName, index) => {
+      PhilExtensionManager.getPackageInfos(packageName, false)?.forEach(
+        (info) => {
+          result.push(info);
+        }
+      );
+    });
+    return result;
+  }
+
+  static getPackageInfos(
+    packageName: string,
+    long: boolean
+  ): string[] | undefined {
+    const pkg = PhilExtensionManager.PACKAGES.find(
+      (pkg) => pkg.name === packageName
+    );
+    if (!pkg) {
+      return undefined;
+    }
+    if (long) {
+      return [
+        pkg.name,
+        'v' + pkg.version,
+        '',
+        pkg.description,
+        '',
+        'Dependencies:',
+        ...pkg.dependencies.map((dep) => '- ' + dep),
+      ];
+    }
+    return [pkg.name + '@' + pkg.version + ' - ' + pkg.description];
   }
 
   private static initAllPackages(): PXMPackage[] {
-    let packages = [];
-    packages.push(get_math_package());
+    let packages = [get_math_package(), get_echoa_package()];
     return packages;
   }
 }

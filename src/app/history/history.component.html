@@ -1,11 +1,19 @@
 <div *ngFor="let line of getHistory()" class="container">
   <p style="white-space: pre">
-    <span
-      *ngFor="let span of line.split('$$$')"
-      [style.color]="
-        span.includes('~~~') ? span.split('~~~')[0] : 'var(--color)'
-      "
-      >{{ span.includes("~~~") ? span.split("~~~")[1] : span }}</span
-    >
+    <span *ngFor="let span of line.split('$$$')">
+      <span
+        *ngIf="!span.includes('&&&')"
+        [style.color]="
+          span.includes('~~~') ? span.split('~~~')[0] : 'var(--color)'
+        "
+        >{{ span.includes("~~~") ? span.split("~~~")[1] : span }}</span
+      >
+      <a
+        *ngIf="span.includes('&&&')"
+        [href]="span.split('&&&')[0]"
+        target="_blank"
+        >{{ span.split("&&&")[1] }}</a
+      >
+    </span>
   </p>
 </div>

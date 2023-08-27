@@ -3,6 +3,7 @@ import { AppComponent } from '../app.component';
 import { AppearanceService } from '../services/appearance.service';
 import { ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
+import { System } from 'src/utils/System';
 
 @Component({
   selector: 'app-home',
@@ -26,11 +27,13 @@ export class HomeComponent {
     return AppearanceService.offsetTop;
   }
 
+  getFile() {
+    return System.ACTIVEFILE;
+  }
+
   onLineExecuted() {
     let element = document.getElementById('eID');
     if (element) {
-      console.log('line executed');
-
       element.scrollIntoView();
     }
   }

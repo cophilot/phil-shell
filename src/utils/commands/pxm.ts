@@ -8,7 +8,8 @@ export function get_pxm() {
       if (args[0] == 'list' || args[0] == 'ls') {
         if (args.length != 1) return ['pxm: too many arguments'];
 
-        const installedPackages = PhilExtensionManager.getInstalledPackages();
+        const installedPackages =
+          PhilExtensionManager.getInstalledPackages(true);
         installedPackages.push(
           installedPackages.length + ' packages installed'
         );

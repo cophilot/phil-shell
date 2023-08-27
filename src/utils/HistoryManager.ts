@@ -10,6 +10,10 @@ export class HistoryManager {
     lines.forEach((line) => this.history.push(line));
   }
 
+  static appendAtLastLine(text: string) {
+    this.history[this.history.length - 1] += text;
+  }
+
   static getHistory() {
     return this.history;
   }

@@ -22,12 +22,15 @@ import { get_mkdir } from './commands/mkdir';
 import { get_pxm } from './commands/pxm';
 import { getUserDir } from './dirs/UserDir';
 import { PhilExtensionManager } from 'src/pxm/PhilExtensionManager';
+import { get_vi } from './commands/vi';
 
 export class System {
   public static VERSION = '1.0';
   public static BASH: Dir = System.getBashDir();
   public static ROOT: Dir = System.getRoot();
   public static currentPath: Dir[] = [System.ROOT];
+
+  public static ACTIVEFILE: any | undefined = undefined;
 
   static getRoot(): Dir {
     const root = new Dir('');
@@ -85,6 +88,7 @@ export class System {
     bash.add(get_ll());
     bash.add(get_mkdir());
     bash.add(get_pxm());
+    bash.add(get_vi());
 
     bash.setWritable(false);
 

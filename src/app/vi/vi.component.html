@@ -1,0 +1,30 @@
+<div class="background"></div>
+<div
+  class="container"
+  [style.left.px]="getOffsetLeft()"
+  [style.top.px]="getOffsetLeft()"
+>
+  <textarea
+    class="text"
+    rows="10"
+    [(ngModel)]="text"
+    [style.height.px]="getTextAreaHeight()"
+    #textAreaEdit
+    *ngIf="!inControlMode"
+  ></textarea>
+  <textarea
+    class="text"
+    rows="10"
+    [style.height.px]="getTextAreaHeight()"
+    readOnly
+    *ngIf="inControlMode"
+    >{{ getTextInControlMode() }}</textarea
+  >
+  <input
+    class="control"
+    type="text"
+    [(ngModel)]="control"
+    [readOnly]="!inControlMode"
+    #controlInput
+  />
+</div>

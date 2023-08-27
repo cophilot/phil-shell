@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Compiler } from 'src/utils/Compiler';
 import { HistoryManager } from 'src/utils/HistoryManager';
 import { System } from 'src/utils/System';
@@ -13,6 +13,8 @@ export class InputLineComponent {
   @Output() lineExecuted: EventEmitter<string> = new EventEmitter();
 
   public static LOCK = false;
+
+  @ViewChild('inputBox') inputBox: any;
 
   dirString: string =
     'phil@phil-shell:' + System.getCurrentPathAsString() + '$';
@@ -56,6 +58,7 @@ export class InputLineComponent {
         this.inputValue = '';
       }
     }
+    this.inputBox.nativeElement.focus();
   }
 
   setDirString() {
