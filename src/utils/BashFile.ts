@@ -1,11 +1,12 @@
 import { InputLineComponent } from 'src/app/input-line/input-line.component';
 import { Compiler } from './Compiler';
 import { Executable } from './Executable';
-import { File } from './File';
 import { PermissionFlag } from './PermissionFlag';
 
 export class BashFile extends Executable {
   content: string[] = [];
+
+  type: string = 'bashfile';
 
   constructor(name: string, content?: string[], replace = true) {
     if (!name.trim().endsWith('.ph') && replace) {
@@ -72,5 +73,12 @@ export class BashFile extends Executable {
         (flag) => flag !== PermissionFlag.WRITE
       );
     }
+  }
+
+  static fromJSON(json: any): BashFile {
+    const file = new BashFile(json.name);
+    file.permissionFlags = json.permissionFlags;
+    file.content = json.content;
+    return file;
   }
 }

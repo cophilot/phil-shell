@@ -4,6 +4,8 @@ import { PermissionFlag } from './PermissionFlag';
 export class File extends Entry {
   content: string[] = [];
 
+  type: string = 'file';
+
   constructor(name: string, content?: string[]) {
     super(name);
     if (content) {
@@ -37,5 +39,12 @@ export class File extends Entry {
         (flag) => flag !== PermissionFlag.WRITE
       );
     }
+  }
+
+  static fromJSON(json: any): File {
+    const file = new File(json.name);
+    file.permissionFlags = json.permissionFlags;
+    file.content = json.content;
+    return file;
   }
 }

@@ -1,8 +1,13 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Compiler } from 'src/utils/Compiler';
 import { HistoryManager } from 'src/utils/HistoryManager';
 import { System } from 'src/utils/System';
-import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-input-line',
@@ -23,6 +28,11 @@ export class InputLineComponent {
 
   ngOnInit() {
     this.setDirString();
+  }
+
+  @HostListener('document:click', ['$event'])
+  focusInput() {
+    this.inputBox.nativeElement.focus();
   }
 
   onKey(event: any) {

@@ -23,10 +23,13 @@ import { get_pxm } from './commands/pxm';
 import { getUserDir } from './dirs/UserDir';
 import { PhilExtensionManager } from 'src/pxm/PhilExtensionManager';
 import { get_vi } from './commands/vi';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { get_lost } from './commands/lost';
 
 export class System {
   public static VERSION = '1.0';
   public static BASH: Dir = System.getBashDir();
+  public static LOCAL: Dir = LocalStorageService.getLocalDirectory();
   public static ROOT: Dir = System.getRoot();
   public static currentPath: Dir[] = [System.ROOT];
 
@@ -52,17 +55,8 @@ export class System {
     // /home/phil
     const usr = new Dir('usr');
     usr.setWritable(false);
-    const local = new Dir('local');
-    const scripts = new Dir('scripts');
-    scripts.add(
-      new BashFile('onboot', [
-        '# This file will be executed on boot',
-        'cd ~',
-        './scripts/Welcome2.ph',
-      ])
-    );
-    local.add(scripts);
-    usr.add(local);
+    usr.add(System.LOCAL);
+
     root.add(usr);
 
     return root;
@@ -89,6 +83,7 @@ export class System {
     bash.add(get_mkdir());
     bash.add(get_pxm());
     bash.add(get_vi());
+    bash.add(get_lost());
 
     bash.setWritable(false);
 

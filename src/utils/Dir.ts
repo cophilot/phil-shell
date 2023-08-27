@@ -1,8 +1,12 @@
+import { BashFile } from './BashFile';
 import { Entry } from './Entry';
+import { File } from './File';
 import { PermissionFlag } from './PermissionFlag';
 
 export class Dir extends Entry {
   entries: Entry[] = [];
+
+  type: string = 'dir';
 
   constructor(name: string) {
     super(name);
@@ -56,6 +60,24 @@ export class Dir extends Entry {
       count++;
     }
     return count;
+  }
+
+  static fromJSON(json: any): Dir {
+    const dir = new Dir(json.name);
+    dir.permissionFlags = json.permissionFlags;
+    dir.entries = json.entries.map((entry: any) => {
+      if (entry.type === 'dir') {
+        return Dir.fromJSON(entry);
+      }
+      if (entry.type === 'file') {
+        return File.fromJSON(entry);
+      }
+      if (entry.type === 'bashfile') {
+        return BashFile.fromJSON(entry);
+      }
+      return undefined;
+    });
+    return dir;
   }
 
   private sortAlaphabetically(): void {
