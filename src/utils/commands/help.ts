@@ -1,5 +1,4 @@
 import { Executable } from '../Executable';
-import { HistoryManager } from '../HistoryManager';
 import { SynonymManager } from '../SynonymManager';
 
 export function get_help() {

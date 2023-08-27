@@ -24,6 +24,25 @@ export class Dir extends Entry {
     return this.entries.find((entry) => entry.name === name);
   }
 
+  getEntryDeep(name: string): Entry | undefined {
+    for (let entry of this.entries) {
+      if (entry.name === name) {
+        return entry;
+      }
+      if (entry instanceof Dir) {
+        const foundEntry = entry.getEntryDeep(name);
+        if (foundEntry) {
+          return foundEntry;
+        }
+      }
+    }
+    return undefined;
+  }
+
+  removeEntry(name: string): void {
+    this.entries = this.entries.filter((entry) => entry.name !== name);
+  }
+
   getEntries(): Entry[] {
     return this.entries;
   }
