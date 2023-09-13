@@ -1,5 +1,6 @@
 import { BashFile } from '../BashFile';
 import { Dir } from '../Dir';
+import { File } from '../File';
 
 export function getUserDir(): Dir {
   const userDir = new Dir('phil');
@@ -387,9 +388,141 @@ export function getUserDir(): Dir {
   );
 
   const projects = new Dir('projects');
+  projects.add(
+    new BashFile('projects', [
+      '# Install echo advanced package',
+      'pxm install echoa -q',
+      ' ',
+      'echo My Projects:',
+      'echo " "',
+      'echoc red OwnObjectScriptExtension',
+      'echo "A Visual Studio Code extension that supplies tools for InterSystems ObjectScript"',
+      'echol https://github.com/phil1436/ownobjectscriptextension View on GitHub',
+      'echo " "',
+      'echoc red OwnGitExtension',
+      'echo "A Visual Studio Code extension that offers tools for working with GitHub projects"',
+      'echol https://github.com/phil1436/owngitextension View on GitHub',
+      'echo " "',
+      'echoc red VSToolKit',
+      'echo "Providing tools for Visual Studio Code"',
+      'echol https://github.com/phil1436/VSToolKit View on GitHub',
+      'echo " "',
+      'echoc red Petgram',
+      'echo "Nothing to see here, just a social media site for pets"',
+      'echol https://petgram.philipp-bonin.com/ Try',
+      'echo " "',
+      'echoc red Color Chicken',
+      'echo "Be a feathered chameleon, master the hurdles in color chicken"',
+      'echol https://colorchicken.philipp-bonin.com/ Try',
+      'echo " "',
+      'echoc red OrbitLab',
+      'echo "A webapplication to simulate orbits"',
+      'echol https://orbitlab.philipp-bonin.com/ Try',
+      'echo " "',
+      'echol https://github.com/phil1436 View my GitHub profile to see more projects',
+      'echo " "',
+    ])
+  );
+  /* projects.add(
+    new File('projects.json', [
+      '[',
+      '   {',
+      '    "name": "OwnObjectScriptExtension",',
+      '    "description": "A Visual Studio Code extension that supplies tools for InterSystems ObjectScript",',
+      '    "link": ""',
+      '   },',
+      '   {',
+      '    "name": "",',
+      '    "description": "",',
+      '    "link": ""',
+      '   },',
+      '   {',
+      '    "name": "",',
+      '    "description": "",',
+      '    "link": ""',
+      '   },',
+      '   {',
+      '    "name": "",',
+      '    "description": "",',
+      '    "link": ""',
+      '   },',
+      '   {',
+      '    "name": "",',
+      '    "description": "",',
+      '    "link": ""',
+      '   },',
+      '   {',
+      '    "name": "",',
+      '    "description": "",',
+      '    "link": ""',
+      '   },',
+      ']',
+    ])
+  ); */
   const skills = new Dir('skills');
+  skills.add(
+    new File('skills.py', [
+      'from programming_languages import Python, Java, JavaScript, TypeScript, HTML, CSS, ObjectScript, C++, SQL',
+      'from frameworks import Angular',
+      'from databases import InterSystems_IRIS',
+      'from tools import Git, Docker, VSCode, IntelliJ, Postman, NodeRED, NodeJS, npm',
+      'from other import Linux, SAP',
+      'from languages import German, English',
+      ' ',
+      'print("To be continued...")',
+      ' ',
+    ])
+  );
   const contact = new Dir('contact');
-  const about = new Dir('about');
+  contact.add(
+    new File('contact.html', [
+      '<html>',
+      '  <head>',
+      '    <title>Phil Contact</title>',
+      '  </head>',
+      '  <body>',
+      '    <h1>Contact</h1>',
+      '    <ul>',
+      '      <li>',
+      '        <a href="https://github.com/phil1436">GitHub</a>',
+      '      </li>',
+      '      <li>',
+      '        <a href="https://community.intersystems.com/user/philipp-bonin">InterSystems Developer Community</a>',
+      '      </li>',
+      '    </ul>',
+      '  </body>',
+      '</html>',
+    ])
+  );
+  const about = new Dir('about-me');
+  about.add(
+    new File('Student.java', [
+      'public class Student implements Nationality<German> {',
+      ' ',
+      '    private final String name;',
+      '    private int age;',
+      '    private String major;',
+      '    private String university;',
+      '    private Job job;',
+      '    private final boolean lovesDogs;',
+      ' ',
+      '    public Student(){',
+      '        this.name = "Philipp";',
+      '        this.age = 23;',
+      '        this.major = "Computer Science B.Sc.";',
+      '        this.university = "Techical University of Darmstadt";',
+      '        this.job = new Job("Intern Software Engineer", "InterSystems");',
+      '        this.lovesDogs = true;',
+      '    }',
+      ' ',
+      '    @Override',
+      '    public String sayHello() {',
+      '        return "Hallo!";',
+      '    }',
+      ' ',
+      '}',
+    ])
+  );
 
   userDir.addEntries([projects, skills, contact, about]);
   return userDir;
