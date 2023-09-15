@@ -34,7 +34,7 @@ export function get_lost() {
       'Access the local storage of your browser to save and load the /usr/local directory',
       ' ',
       'lost save',
-      'save the /usr/local directory in the local storage',
+      'save the /usr/local directory in the local storage so it will be loaded at the next visit',
       ' ',
       'lost clear',
       'clear the /usr/local directory in the local storage',

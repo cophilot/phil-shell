@@ -25,6 +25,7 @@ import { PhilExtensionManager } from 'src/pxm/PhilExtensionManager';
 import { get_vi } from './commands/vi';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { get_lost } from './commands/lost';
+import { get_rp } from './commands/rp';
 
 export class System {
   public static VERSION = '1.0';
@@ -84,6 +85,7 @@ export class System {
     bash.add(get_pxm());
     bash.add(get_vi());
     bash.add(get_lost());
+    bash.add(get_rp());
 
     bash.setWritable(false);
 

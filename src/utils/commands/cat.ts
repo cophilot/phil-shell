@@ -46,7 +46,7 @@ export function get_cat() {
       'Print the content of a file in the terminal',
       ' ',
       'cat [file]',
-      "PRINT the content of the file 'file' in the terminal",
+      "Print the content of the file 'file' in the terminal",
       ' ',
     ]
   );

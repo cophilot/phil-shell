@@ -49,8 +49,19 @@ export function get_ls() {
       },
     },
     [
-      'List information about the FILEs (the current directory by default).',
-      'ls [dir]?',
+      ' ',
+      '***************************',
+      '*** list directory HELP ***',
+      '***************************',
+      ' ',
+      'List the content of a directory',
+      ' ',
+      'ls [directory]',
+      "List the content of the directory 'directory'",
+      ' ',
+      'ls',
+      'List the content of the current directory',
+      ' ',
     ]
   );
 }

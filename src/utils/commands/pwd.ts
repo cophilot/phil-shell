@@ -24,6 +24,9 @@ export function get_pwd() {
       ' ',
       'Print the current working directory',
       ' ',
+      'pwd',
+      'Print the current working directory',
+      ' ',
     ]
   );
 }

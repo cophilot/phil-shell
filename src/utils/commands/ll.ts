@@ -74,8 +74,19 @@ export function get_ll() {
       },
     },
     [
-      'List information about the FILEs (the current directory by default).',
-      'ls [dir]?',
+      ' ',
+      '*************************',
+      '*** long listing HELP ***',
+      '*************************',
+      ' ',
+      'List information about the files',
+      ' ',
+      'll',
+      'List information about the files in the current directory',
+      ' ',
+      'll [directory]',
+      'List information about the files in the directory [directory]',
+      ' ',
     ]
   );
 }

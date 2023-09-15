@@ -33,7 +33,18 @@ export function get_wait() {
         });
       },
     },
-    [],
+    [
+      ' ',
+      '*****************',
+      '*** wait HELP ***',
+      '*****************',
+      ' ',
+      'Wait for a specified amount of time',
+      ' ',
+      'wait [time]',
+      'Wait for [time] milliseconds',
+      ' ',
+    ],
     true
   );
 }
