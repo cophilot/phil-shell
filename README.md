@@ -3,15 +3,15 @@
   <img src="src/assets/logo.png" alt="phil-shellLogo" width="30%"/>
   <h1>phil-shell</h1>
   <p>
-     Description
+     A shell like personal website.
   </p>
 </div>
 
 <!-- Badges -->
 <div align="center">
-   <a href="https://github.com/phil1436/phil-shell/releases">
-       <img src="https://img.shields.io/github/v/release/phil1436/phil-shell?display_name=tag" alt="current realease" />
-   </a>
+  <a href="https://shell.philipp-bonin.com/">
+      <img src="https://img.shields.io/website?down_color=red&down_message=offline&up_color=green&up_message=online&url=https%3A%2F%2Fshell.philipp-bonin.com%2F" alt="website">
+  </a>
    <a href="https://github.com/phil1436/phil-shell/blob/master/LICENSE">
        <img src="https://img.shields.io/github/license/phil1436/phil-shell" alt="license" />
    </a>
