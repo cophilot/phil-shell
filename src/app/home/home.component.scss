@@ -14,9 +14,27 @@
   z-index: -1;
 }
 
+.by{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.5;
+  font-size: 12px;
+  color: var(--color);
+  text-align: center;
+  margin-top: 20px;
+  a{
+    color: var(--color);
+    text-decoration: none;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .container{
     margin-bottom: 20px;
+  }
+  .by{
+    display: none;
   }
 
 }

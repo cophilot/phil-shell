@@ -18,7 +18,27 @@ export class PhilExtensionManager {
     return dir;
   }
 
-  public static installPackage(packageName: string, log: string[]): boolean {
+  static installAllPAckages(log: string[]): boolean {
+    let avPkgs = PhilExtensionManager.getAvailablePackages(false);
+    if (avPkgs.length == 0) {
+      log.push('No packages available');
+      return false;
+    }
+    log.push('Installing all available packages...');
+    for (let pkg of avPkgs) {
+      if (!PhilExtensionManager.installPackage(pkg, log)) {
+        log.push(
+          SynonymManager.colorString('ERROR', 'red') +
+            `: Failed to install package ${pkg}`
+        );
+        return false;
+      }
+    }
+    log.push('All packages installed successfully');
+    return true;
+  }
+
+  static installPackage(packageName: string, log: string[]): boolean {
     if (PhilExtensionManager.PXM_MODULES.getEntry(packageName)) {
       log.push(`Package ${packageName} already installed`);
       return true;
@@ -64,7 +84,25 @@ export class PhilExtensionManager {
     return true;
   }
 
-  public static uninstallPackage(packageName: string): string[] {
+  static uninstallAllPackages(): string[] {
+    const log: string[] = [];
+    const installedPackages = PhilExtensionManager.getInstalledPackages(false);
+    if (installedPackages.length == 0) {
+      log.push('No packages installed');
+      return log;
+    }
+    log.push('Uninstalling all packages...');
+    for (let pkg of installedPackages) {
+      let a = PhilExtensionManager.uninstallPackage(pkg);
+      a.forEach((e) => {
+        log.push(e);
+      });
+    }
+    log.push('All packages uninstalled successfully');
+    return log;
+  }
+
+  static uninstallPackage(packageName: string): string[] {
     const log: string[] = [];
     log.push('Uninstalling package ' + packageName + '...');
     const pkg = PhilExtensionManager.PXM_MODULES.getEntry(packageName);
@@ -83,6 +121,25 @@ export class PhilExtensionManager {
   static getInstalledPackages(withInfos: boolean): string[] {
     let packageNames = PhilExtensionManager.PXM_MODULES.entries.map(
       (entry) => entry.name
+    );
+    if (!withInfos) {
+      return packageNames;
+    }
+    let result: string[] = [];
+    packageNames.forEach((packageName, index) => {
+      PhilExtensionManager.getPackageInfos(packageName, false)?.forEach(
+        (info) => {
+          result.push(info);
+        }
+      );
+    });
+    return result;
+  }
+
+  static getAvailablePackages(withInfos: boolean): string[] {
+    let packageNames = PhilExtensionManager.PACKAGES.map((pkg) => pkg.name);
+    packageNames = packageNames.filter(
+      (name) => !PhilExtensionManager.PXM_MODULES.getEntry(name)
     );
     if (!withInfos) {
       return packageNames;
