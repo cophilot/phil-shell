@@ -28,7 +28,6 @@ export class AppearanceService {
   static init() {
     AppearanceService.detectPrefersColorScheme();
     AppearanceService.isMobile = window.innerWidth < 800;
-    console.log('AppearanceService.isMobile', AppearanceService.isMobile);
     if (AppearanceService.isMobile) {
       AppearanceService.offsetLeft = 10;
     }
@@ -52,7 +51,6 @@ export class AppearanceService {
         ? 'dark'
         : 'light';
     }
-    console.log('theme', theme);
     this.setTheme(theme);
   }
 }

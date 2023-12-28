@@ -35,6 +35,40 @@ export class InputLineComponent {
     this.inputBox.nativeElement.focus();
   }
 
+  @HostListener('document:keydown.tab', ['$event'])
+  onTab(event: any) {
+    // prevent tab from changing focus
+    event.preventDefault();
+    this.inputBox.nativeElement.focus();
+    if (this.inputValue === '' || this.inputValue.endsWith(' ')) {
+      this.inputValue += '  ';
+      return;
+    }
+    const lastWord = this.inputValue.split(' ').pop();
+    if (lastWord === undefined) return;
+    const currentDir = System.getCurrentDir();
+    const entries = currentDir.getEntries();
+    const matches = entries
+      .filter((entry) => entry.name.startsWith(lastWord))
+      .map((entry) => entry.name);
+    if (matches.length === 1) {
+      const adding = matches[0].replace(lastWord, '');
+      this.inputValue += adding;
+      return;
+    }
+    const commonPrefix = matches.reduce((a: string, b: string) => {
+      let i = 0;
+      while (a[i] === b[i]) {
+        i++;
+        if (i === a.length) break;
+        if (i === b.length) break;
+      }
+      return a.slice(0, i);
+    }, matches[0]);
+    this.inputValue = this.inputValue.replace(lastWord, commonPrefix);
+    this.inputBox.nativeElement.focus();
+  }
+
   onKey(event: any) {
     // enter
     if (event.keyCode === 13) {

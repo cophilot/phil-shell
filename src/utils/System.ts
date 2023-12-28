@@ -28,7 +28,7 @@ import { get_lost } from './commands/lost';
 import { get_rp } from './commands/rp';
 
 export class System {
-  public static VERSION = '1.0';
+  public static VERSION = '1.1';
   public static BASH: Dir = System.getBashDir();
   public static LOCAL: Dir = LocalStorageService.getLocalDirectory();
   public static ROOT: Dir = System.getRoot();
@@ -50,7 +50,8 @@ export class System {
 
     // /home/phil
     const home = new Dir('home');
-    home.add(getUserDir());
+    const userDir = getUserDir();
+    home.add(userDir);
     root.add(home);
 
     // /home/phil

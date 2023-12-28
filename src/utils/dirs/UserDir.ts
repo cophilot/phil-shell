@@ -388,7 +388,7 @@ export function getUserDir(): Dir {
   );
 
   const projects = new Dir('projects');
-  projects.add(
+  /* projects.add(
     new BashFile('projects', [
       '# Install echo advanced package',
       'pxm install echoa -q',
@@ -422,48 +422,23 @@ export function getUserDir(): Dir {
       'echol https://github.com/phil1436 View my GitHub profile to see more projects',
       'echo " "',
     ])
-  );
-  /* projects.add(
-    new File('projects.json', [
-      '[',
-      '   {',
-      '    "name": "OwnObjectScriptExtension",',
-      '    "description": "A Visual Studio Code extension that supplies tools for InterSystems ObjectScript",',
-      '    "link": ""',
-      '   },',
-      '   {',
-      '    "name": "",',
-      '    "description": "",',
-      '    "link": ""',
-      '   },',
-      '   {',
-      '    "name": "",',
-      '    "description": "",',
-      '    "link": ""',
-      '   },',
-      '   {',
-      '    "name": "",',
-      '    "description": "",',
-      '    "link": ""',
-      '   },',
-      '   {',
-      '    "name": "",',
-      '    "description": "",',
-      '    "link": ""',
-      '   },',
-      '   {',
-      '    "name": "",',
-      '    "description": "",',
-      '    "link": ""',
-      '   },',
-      ']',
-    ])
   ); */
+
+  fetch(
+    'https://raw.githubusercontent.com/phil1436/.project-provider/main/projects.json'
+  ).then((resp) =>
+    resp.json().then((json) => {
+      projects.add(
+        new File('projects.json', JSON.stringify(json, null, 2).split('\n'))
+      );
+    })
+  );
+
   const skills = new Dir('skills');
   skills.add(
     new File('skills.py', [
-      'from programming_languages import Python, Java, JavaScript, TypeScript, HTML, CSS, ObjectScript, C++, SQL',
-      'from frameworks import Angular',
+      'from programming_languages import Python, Java, JavaScript, TypeScript, CSS, SASS, Go, ObjectScript, C++, SQL',
+      'from frameworks import Angular, React, Vue',
       'from databases import InterSystems_IRIS',
       'from tools import Git, Docker, VSCode, IntelliJ, Postman, NodeRED, NodeJS, npm',
       'from other import Linux, SAP',
@@ -488,9 +463,6 @@ export function getUserDir(): Dir {
       '      </li>',
       '      <li>',
       '        <a href="https://github.com/phil1436">GitHub</a>',
-      '      </li>',
-      '      <li>',
-      '        <a href="https://community.intersystems.com/user/philipp-bonin">InterSystems Developer Community</a>',
       '      </li>',
       '    </ul>',
       '  </body>',

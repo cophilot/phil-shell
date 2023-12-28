@@ -12,7 +12,6 @@ export class LocalStorageService {
   static getLocalDirectory(): Dir {
     let localX = localStorage.getItem('localDirectory');
     if (localX) {
-      console.log(localX);
       return Dir.fromJSON(JSON.parse(localX));
     }
     const local = new Dir('local');

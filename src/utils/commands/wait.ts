@@ -7,7 +7,6 @@ export function get_wait() {
     'wait',
     {
       execute: (args) => {
-        console.log(args);
         throw new Error('Method not implemented.');
       },
       executeAsync: async (args) => {

@@ -11,6 +11,7 @@
     [style.height.px]="getTextAreaHeight()"
     #textAreaEdit
     *ngIf="!inControlMode"
+    spellcheck="false"
   ></textarea>
   <textarea
     class="text"
@@ -18,9 +19,11 @@
     [style.height.px]="getTextAreaHeight()"
     readOnly
     *ngIf="inControlMode"
+    spellcheck="false"
     >{{ getTextInControlMode() }}</textarea
   >
   <input
+    spellcheck="false"
     class="control"
     type="text"
     [(ngModel)]="control"
