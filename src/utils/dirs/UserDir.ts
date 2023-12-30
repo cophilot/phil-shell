@@ -437,10 +437,10 @@ export function getUserDir(): Dir {
   const skills = new Dir('skills');
   skills.add(
     new File('skills.py', [
-      'from programming_languages import Python, Java, JavaScript, TypeScript, CSS, SASS, Go, ObjectScript, C++, SQL',
+      'from programming_languages import Python, Java, JavaScript, TypeScript, SASS, Go, ObjectScript, C++, SQL',
       'from frameworks import Angular, React, Vue',
-      'from databases import InterSystems_IRIS',
-      'from tools import Git, Docker, VSCode, IntelliJ, Postman, NodeRED, NodeJS, npm',
+      'from databases import InterSystems_IRIS, PostgreSQL',
+      'from tools import Git, Docker, VSCode, Postman, NodeRED, NodeJS, npm, Vite',
       'from other import Linux, SAP',
       'from languages import German, English',
       ' ',
