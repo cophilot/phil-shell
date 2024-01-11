@@ -459,7 +459,7 @@ export function getUserDir(): Dir {
       '    <h1>Contact</h1>',
       '    <ul>',
       '      <li>',
-      '        <a href="mailto:phil.likes.coding@gmail.com">E-Mail</a>',
+      '        <a href="mailto:info@philipp-bonin.com">E-Mail</a>',
       '      </li>',
       '      <li>',
       '        <a href="https://github.com/cophilot">GitHub</a>',
