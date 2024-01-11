@@ -397,15 +397,15 @@ export function getUserDir(): Dir {
       'echo " "',
       'echoc red OwnObjectScriptExtension',
       'echo "A Visual Studio Code extension that supplies tools for InterSystems ObjectScript"',
-      'echol https://github.com/phil1436/ownobjectscriptextension View on GitHub',
+      'echol https://github.com/cophilot/ownobjectscriptextension View on GitHub',
       'echo " "',
       'echoc red OwnGitExtension',
       'echo "A Visual Studio Code extension that offers tools for working with GitHub projects"',
-      'echol https://github.com/phil1436/owngitextension View on GitHub',
+      'echol https://github.com/cophilot/owngitextension View on GitHub',
       'echo " "',
       'echoc red VSToolKit',
       'echo "Providing tools for Visual Studio Code"',
-      'echol https://github.com/phil1436/VSToolKit View on GitHub',
+      'echol https://github.com/cophilot/VSToolKit View on GitHub',
       'echo " "',
       'echoc red Petgram',
       'echo "Nothing to see here, just a social media site for pets"',
@@ -419,13 +419,13 @@ export function getUserDir(): Dir {
       'echo "A webapplication to simulate orbits"',
       'echol https://orbitlab.philipp-bonin.com/ Try',
       'echo " "',
-      'echol https://github.com/phil1436 View my GitHub profile to see more projects',
+      'echol https://github.com/cophilot View my GitHub profile to see more projects',
       'echo " "',
     ])
   ); */
 
   fetch(
-    'https://raw.githubusercontent.com/phil1436/.project-provider/main/projects.json'
+    'https://raw.githubusercontent.com/cophilot/.project-provider/main/projects.json'
   ).then((resp) =>
     resp.json().then((json) => {
       projects.add(
@@ -462,7 +462,7 @@ export function getUserDir(): Dir {
       '        <a href="mailto:phil.likes.coding@gmail.com">E-Mail</a>',
       '      </li>',
       '      <li>',
-      '        <a href="https://github.com/phil1436">GitHub</a>',
+      '        <a href="https://github.com/cophilot">GitHub</a>',
       '      </li>',
       '    </ul>',
       '  </body>',

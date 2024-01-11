@@ -44,7 +44,7 @@ export function get_sys() {
             break;
           case 'github':
             // open github
-            window.location.href = 'https://github.com/phil1436/phil-shell';
+            window.location.href = 'https://github.com/cophilot/phil-shell';
             result = ['Redirecting to GitHub...'];
             break;
           case 'theme':
