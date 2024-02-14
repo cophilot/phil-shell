@@ -437,7 +437,7 @@ export function getUserDir(): Dir {
   const skills = new Dir('skills');
   skills.add(
     new File('skills.py', [
-      'from programming_languages import Python, Java, JavaScript, TypeScript, SASS, Go, ObjectScript, C++, SQL',
+      'from programming_languages import Python, Java, JavaScript, TypeScript, SASS, Go, C++, SQL, Rust',
       'from frameworks import Angular, React, Vue',
       'from databases import InterSystems_IRIS, PostgreSQL',
       'from tools import Git, Docker, VSCode, Postman, NodeRED, NodeJS, npm, Vite',
@@ -486,7 +486,7 @@ export function getUserDir(): Dir {
       '        this.age = 23;',
       '        this.major = "Computer Science B.Sc.";',
       '        this.university = "Technical University of Darmstadt";',
-      '        this.job = new Job("Intern Software Engineer", "InterSystems");',
+      '        this.job = new Job("Software Developer", "CQSE");',
       '        this.lovesDogs = true;',
       '    }',
       ' ',
